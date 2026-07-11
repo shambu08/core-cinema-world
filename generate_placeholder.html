@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Placeholder Image</title>
+</head>
+<body>
+    <h2>Right-click and save this image as "placeholder.jpg" in images/posters/ folder</h2>
+    <canvas id="canvas" width="300" height="450"></canvas>
+    <br>
+    <button onclick="downloadImage()">Download Placeholder Image</button>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Draw gradient background
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, '#667eea');
+        gradient.addColorStop(1, '#764ba2');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw film icon
+        ctx.fillStyle = 'rgba(255,255,255,0.8)';
+        ctx.font = '80px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('🎬', canvas.width/2, canvas.height/2 - 30);
+        
+        // Draw text
+        ctx.font = 'bold 18px Arial';
+        ctx.fillStyle = 'white';
+        ctx.fillText('Image Coming Soon', canvas.width/2, canvas.height/2 + 50);
+        
+        ctx.font = '14px Arial';
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.fillText('Core Cinema World', canvas.width/2, canvas.height - 30);
+        
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.download = 'placeholder.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.9);
+            link.click();
+            alert('Placeholder image saved! Save it in: images/posters/placeholder.jpg');
+        }
+    </script>
+</body>
+</html>
